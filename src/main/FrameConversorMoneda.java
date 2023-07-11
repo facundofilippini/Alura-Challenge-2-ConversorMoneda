@@ -132,7 +132,16 @@ public class FrameConversorMoneda extends JFrame {
 		
 		btnConvertir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cantidad = Double.parseDouble(CantidadTextField.getText());
+				try {
+					cantidad = Double.parseDouble(CantidadTextField.getText());
+					
+				} catch(NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Ingrese números unicamente");
+					ex.printStackTrace();
+							
+				}
+				
+				
 				convertirMoneda(cantidad);
 					
 				resultadoLabel.setText(String.valueOf(conversionRound));
@@ -258,7 +267,7 @@ public class FrameConversorMoneda extends JFrame {
 		}
 		
 		conversionRound = (double)Math.round(conversion * 100d) / 100; 	//todo esto para redondear 
-																		//la salida a dos decimles
+																		//la salida a dos decimles aaa
 		
 		conversion = conversionRound;
 		

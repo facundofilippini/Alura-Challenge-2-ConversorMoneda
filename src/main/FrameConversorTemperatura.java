@@ -108,7 +108,14 @@ public class FrameConversorTemperatura extends JFrame {
 		
 		btnConvertir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cantidad = Double.parseDouble(CantidadTextField.getText());
+				try {
+					cantidad = Double.parseDouble(CantidadTextField.getText());
+					
+				} catch(NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Ingrese números unicamente");
+					ex.printStackTrace();
+							
+				}
 				convertirTemperatura(cantidad);
 				resultadoLabel.setText(String.valueOf(conversion));	
 			}
