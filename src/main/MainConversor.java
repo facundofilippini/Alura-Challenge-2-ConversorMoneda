@@ -5,6 +5,13 @@ public class MainConversor {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		
+		IniciarPrograma();
+		
+	}
+	
+	public static void IniciarPrograma() {
 		FrameConversorMoneda conversorMoneda = new FrameConversorMoneda();
 		FrameConversorTemperatura conversorTemperatura = new FrameConversorTemperatura();
 		
@@ -19,8 +26,7 @@ public class MainConversor {
 		} else if (option.toString().equals("Conversor de Temperatura")) {
 			conversorTemperatura.frame();			
 					
-		} 			
-		
+		} 
 	}
 
 }

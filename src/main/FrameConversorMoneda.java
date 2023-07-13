@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
+import java.awt.Frame;
+
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -23,6 +25,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.SwingConstants;
+import java.awt.ComponentOrientation;
+
 
 public class FrameConversorMoneda extends JFrame {
 	
@@ -38,13 +42,16 @@ public class FrameConversorMoneda extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
 	public void frame() {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					FrameConversorMoneda frame = new FrameConversorMoneda();
 					frame.setVisible(true);
 					frame.getContentPane().setLayout(null);
+					frame.setLocation(700, 250);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,9 +59,11 @@ public class FrameConversorMoneda extends JFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
+	
 	public FrameConversorMoneda() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -130,12 +139,34 @@ public class FrameConversorMoneda extends JFrame {
 		getContentPane().add(resultadoLabel);
 		resultadoLabel.setColumns(10);
 		
+		JButton btnNewButton = new JButton("Salir");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(null, "Programa finalizado");
+				System.exit(WIDTH);
+			}
+		});
+		btnNewButton.setBounds(335, 227, 89, 23);
+		getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Volver");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				MainConversor.IniciarPrograma();
+				
+			}
+		});
+		btnNewButton_1.setBounds(23, 227, 89, 23);
+		getContentPane().add(btnNewButton_1);
+		
 		btnConvertir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					cantidad = Double.parseDouble(CantidadTextField.getText());
 					
-				} catch(NumberFormatException ex) {
+				} catch(Exception ex) {
 					JOptionPane.showMessageDialog(null, "Ingrese números unicamente");
 					ex.printStackTrace();
 							
@@ -274,5 +305,9 @@ public class FrameConversorMoneda extends JFrame {
 		
 		return conversionRound;
 	}
+	
+	
 }
+
+
 

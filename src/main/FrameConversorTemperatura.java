@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
 
 public class FrameConversorTemperatura extends JFrame {
 
@@ -24,6 +25,7 @@ public class FrameConversorTemperatura extends JFrame {
 	String de;
 	String a;
 	double conversion = 0;
+	double conversionRound;
 
 	/**
 	 * Launch the application.
@@ -34,6 +36,7 @@ public class FrameConversorTemperatura extends JFrame {
 				try {
 					FrameConversorTemperatura frame = new FrameConversorTemperatura();
 					frame.setVisible(true);
+					frame.setLocation(700, 250);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,7 +54,7 @@ public class FrameConversorTemperatura extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JLabel deLabel = new JLabel("De");
-		deLabel.setBounds(24, 93, 125, 14);
+		deLabel.setBounds(24, 65, 125, 14);
 		getContentPane().add(deLabel);
 		
 		final JComboBox deComboBox = new JComboBox();
@@ -66,12 +69,12 @@ public class FrameConversorTemperatura extends JFrame {
 		
 		deComboBox.setModel(new DefaultComboBoxModel(new String[] {"Seleccione temperatura", "°C (grados Celsius)", "°F (grados Fahrenheit)", "°K (grados Kelvin)", "°R (Rankine)"}));
 		deComboBox.setSelectedIndex(0);
-		deComboBox.setBounds(24, 118, 168, 29);
+		deComboBox.setBounds(24, 130, 157, 29);
 		deComboBox.setEditable(true);
 		getContentPane().add(deComboBox);
 		
 		JLabel aLabel = new JLabel("A");
-		aLabel.setBounds(261, 93, 125, 14);
+		aLabel.setBounds(259, 65, 125, 14);
 		getContentPane().add(aLabel);
 		
 		final JComboBox aComboBox = new JComboBox();
@@ -83,12 +86,12 @@ public class FrameConversorTemperatura extends JFrame {
 		});
 		aComboBox.setModel(new DefaultComboBoxModel(new String[] {"Seleccione temperatura", "°C (grados Celsius)", "°F (grados Fahrenheit)", "°K (grados Kelvin)", "°R (Rankine)"}));
 		aComboBox.setEditable(true);
-		aComboBox.setBounds(245, 118, 168, 29);
+		aComboBox.setBounds(245, 130, 157, 29);
 		getContentPane().add(aComboBox);
 		
 		final JLabel resultadoLabel = new JLabel("");
 		resultadoLabel.setBackground(Color.WHITE);
-		resultadoLabel.setBounds(142, 190, 125, 37);
+		resultadoLabel.setBounds(245, 90, 157, 29);
 		getContentPane().add(resultadoLabel);
 		
 		JLabel tituloLabel = new JLabel("Ingrese la cantidad a convertir:");
@@ -97,14 +100,42 @@ public class FrameConversorTemperatura extends JFrame {
 		getContentPane().add(tituloLabel);
 		
 		CantidadTextField = new JTextField();
-		CantidadTextField.setBounds(142, 45, 125, 29);
+		CantidadTextField.setBounds(24, 90, 157, 29);
 		getContentPane().add(CantidadTextField);
 		CantidadTextField.setColumns(10);
 		
 		JButton btnConvertir = new JButton("Convertir");
 		
-		btnConvertir.setBounds(165, 155, 89, 23);
+		btnConvertir.setBounds(166, 195, 89, 23);
 		getContentPane().add(btnConvertir);
+		
+		JButton btnNewButton = new JButton("Salir");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Programa finalizado");
+				System.exit(WIDTH);
+			}
+		});
+		btnNewButton.setBounds(324, 227, 89, 23);
+		getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Volver");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				MainConversor.IniciarPrograma();
+			}
+			
+			
+		});
+		btnNewButton_1.setBounds(24, 227, 89, 23);
+		getContentPane().add(btnNewButton_1);
+		
+		JLabel deLabel_1 = new JLabel("=");
+		deLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		deLabel_1.setFont(new Font("Tahoma", Font.BOLD, 40));
+		deLabel_1.setBounds(191, 98, 33, 61);
+		getContentPane().add(deLabel_1);
 		
 		btnConvertir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,6 +151,8 @@ public class FrameConversorTemperatura extends JFrame {
 				resultadoLabel.setText(String.valueOf(conversion));	
 			}
 		});
+		
+	
 	}
 	/*
 	 * 	Seleccione temperatura
@@ -186,8 +219,13 @@ public class FrameConversorTemperatura extends JFrame {
 				
 		
 		}
-		return conversion;
+		conversionRound = (double)Math.round(conversion * 100d) / 100; 	//todo esto para redondear 
+		//la salida a dos decimles aaa
+
+		conversion = conversionRound;
+
+
+		return conversionRound;
+		
 	}
-	
-	
 }
